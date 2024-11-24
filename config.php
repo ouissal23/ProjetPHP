@@ -10,13 +10,15 @@ if(isset($_POST["submit"])){
     else if(!preg_match("/\w+(@emsi.ma){1}$/",$emailValue)){
         $emailErrorMsg = "Please enter a valid emsi email";
     }
-    else if( $passwordValue == ""){
+     if( $passwordValue == ""){
         $passwordErrorMsg = "Password must be filled out!";
-    }else{
+    
+    }
+    if($emailErrorMsg =="" && $passwordErrorMsg =="") {
         session_start();
         $_SESSION["emailS"]=$emailValue;
         $_SESSION["passS"]=$passwordValue;
-        header("location:home.php");
+        header("Location:home.php");
     }
     
 }
