@@ -18,14 +18,10 @@ include("config.php");
     <input value="<?php if(isset($emailValue)) echo $emailValue?>" name= "emailName" type="email" placeholder=""><br>
     <span style='color:red'> <?php echo $emailErrorMsg ?></span>
     <label>Password</label>
-    <input  name= "passName" type="password" placeholder=""><br>
+    <input value="<?php if(isset($passwordValue)) echo $passwordValue?>" name= "passName" type="password" placeholder=""><br>
     <span style='color:red'><?php echo $passwordErrorMsg ?></span>
     <button name="submit" type="submit" class="btn btn-primary">Login</button>
 </form>
-
-
-
  </div>
-    
 </body>
 </html>
