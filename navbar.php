@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navdiv">
-      <div class="logo"><a href="#">Sweeties</a></div>
+      <div class="logo"><a href="#">LabNet</a></div>
       <ul>
         <li><a href="home.php">Home</a></li>
         <li><a href="page.php">Page</a></li>
