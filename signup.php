@@ -1,3 +1,8 @@
+<?php
+session_start();
+session_destroy();
+include("config2.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,23 +14,25 @@
 <body>
     <div class="signup-box">
     <h1>Sign Up </h1>
-    <form>
+    <form action="" method="post">
         <label>First Name</label>
-        <input type="text" placeholder=""> <br>
+        <input value="<?php if(isset($fnameValue)) echo $fnameValue?>" type="text"  name= "fname"placeholder=""> <br>
+        <span style='color:red'><?php echo $fnameError  ?></span><br>
         <label>Last Name</label>
-        <input type="text" placeholder=""><br>
+        <input value="<?php if(isset($lnameValue)) echo $lnameValue?>" type="text" name="lname"placeholder=""><br>
+        <span style='color:red'><?php echo $lnameError  ?></span>
         <label>Email</label>
-        <input type="email" placeholder=""><br>
+        <input value="<?php if(isset($emailValue)) echo $emailValue?>" type="email" name="emailName" placeholder=""><br>
+        <span style='color:red'> <?php echo $emailErrorMsg ?></span>
         <label>Password</label>
-        <input type="password" placeholder=""><br>
-        <label>Confirm Password</label>
-        <input type="password" placeholder=""><br>
-        <button type="submit" class="btn">Sign Up</button>
+        <input value="<?php if(isset($passwordValue)) echo $passwordValue?>"  type="password" name="passName" placeholder=""><br>
+        <span style='color:red'> <?php echo $passwordErrorMsg ?></span><br>
+        <button type="submit" class="btn" name="submit">Sign Up</button>
 
     
     
 
     </form>
-</div>
+</div>  
 </body>
 </html>
