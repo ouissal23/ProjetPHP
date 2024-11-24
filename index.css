@@ -1,12 +1,12 @@
 body{
-    background-color: #FADADD;
+    background-color:/* #FADADD;*/white;
     font-family:'Roboto', sans-serif;
 }
 .signup-box{
     width:360px;
     height:620px;
     margin:auto;
-    background-color:#FFF8E1;
+    background-color:rgb(221, 185, 139);
 
 }
 .login{
@@ -14,7 +14,7 @@ body{
     height:280px;
     margin:auto;
     border-radius:3px;
-    background-color:#FFF8E1;
+    background-color:/*#FFF8E1;*/ rgb(221, 185, 139);
 }
    
 h1{
@@ -42,7 +42,7 @@ button[type="submit"]{
     height:35px;
     margin-top:20px;
     border:none;
-    background-color:#ebc79b;
+    background-color:rgb(220, 201, 167);
     font-size:18px;
    
 }
