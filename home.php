@@ -11,11 +11,11 @@ session_start();
    
 </head>
 <body>
-    <?php
+ <?php
     include("navbar.php");
-    echo 'Welcome to Home , your information:<br>';
-    echo 'Email:' . $_SESSION["emailS"]. '<br> ';
-    echo 'Password:' . $_SESSION["passS"].'<br>' ;
+    //echo 'Welcome to Home , your information:<br>';
+   // echo 'Email:' . $_SESSION["emailS"]. '<br> ';
+    //echo 'Password:' . $_SESSION["passS"].'<br>' ;
     ?>
 
 </body>
