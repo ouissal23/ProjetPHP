@@ -1,4 +1,14 @@
 <?php
+include('connection.php');
+   
+
+
+$connection= new Connection();
+
+
+
+$connection->selectDatabase('Lab');
+
 
 
 $emailValue = "";
@@ -14,6 +24,7 @@ if(isset($_POST["submit"])){
     $lnameValue = $_POST["lastName"];
     $fnameValue = $_POST["firstName"];
     $passwordValue = $_POST["password"];
+    $idFieldValue =$_POST["fields"];
 
 
     if(empty($emailValue) || empty($fnameValue) || empty($lnameValue) || empty($passwordValue)){
@@ -28,21 +39,10 @@ if(isset($_POST["submit"])){
         $errorMesage = "password must contains  at least one capital letter!";
     }else{
     
-        include('connection.php');
-   
-
-
-    $connection= new Connection();
-  
-
-
-    $connection->selectDatabase('Lab');
-   
-    
    include('Researcher.php');
 
 
-   $researcher = new Researcher($fnameValue,$lnameValue,$emailValue,$passwordValue);
+   $researcher = new Researcher($fnameValue,$lnameValue,$emailValue,$passwordValue,$idFieldValue);
 
 
    $researcher->insertResearcher('Researcher',$connection->conn);
@@ -115,12 +115,28 @@ $fnameValue = "";
                         <input value=" <?php echo $emailValue ?>" class="form-control" type="email" id="email" name="email">
                     </div>
             </div>
+            <div class="row mb-3">
+            <label class="col-form-label col-sm-1" for="fields">Fields:</label>
+            <div class="col-sm-6">
+                <select name='fields' class="form-select">
+                <option selected>Select a field</option>
+                <?php 
+                include('field.php');
+                $fields=Field::selectAllFields('Fields',$connection->conn);
+                foreach($fields as $field){
+                    echo "<option value='$field[id]'>$field[name]</option>";
+                }
+                ?>
+         </select>
+         </div>
+      </div>
             <div class="row mb-3 ">
                     <label class="col-form-label col-sm-1" for="password">Password:</label>
                     <div class="col-sm-6">
                         <input  class="form-control" type="password" id="password" name="password" >
                     </div>
             </div>
+
 
 
             <?php
