@@ -1,3 +1,22 @@
+<?php
+include('field.php');
+include('connection.php');
+   
+
+
+$connection= new Connection();
+
+
+
+ $connection->selectDatabase('Lab');
+
+
+include('Researcher.php');
+$researchers= Researcher::selectAllResearchers('Researcher',$connection->conn);
+if(isset($_POST['submit'])){
+    $researchers= Researcher::selectResearcherByFieldId('Researcher',$connection->conn,$_POST['fields']);  
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +38,25 @@
 
     <br>
     <br>
+    <form method="post">
+
+    <div class="input-group">
+  <span class="input-group-btn">
+   
+    <button class="btn btn-success" type="submit" name="submit">Search</button>
+   
+  </span>
+  <select name='fields' class="form-select">
+                <option selected>Select a field</option>
+                <?php 
+               
+                $fields=Field::selectAllFields('Fields',$connection->conn);
+                foreach($fields as $field){
+                    echo "<option value='$field[id]'>$field[name]</option>";
+                }
+                ?>
+</select>
+</form>
     <table class="table">
        <thead>
         <tr>
@@ -26,6 +64,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Field name</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -33,28 +72,17 @@
 
 
         <?php
-
-          include('connection.php');
-   
-
-
-           $connection= new Connection();
-
-
-
-            $connection->selectDatabase('Lab');
-
-       
-          include('Researcher.php');
-       
-         $researchers= Researcher::selectAllResearchers('Researcher',$connection->conn);
+         //$researchers= Researcher::selectAllResearchers('Researcher',$connection->conn);
        
         foreach($researchers as $row) {
+    
+            $field = Field::selectFieldById('Fields',$connection->conn,$row['idField']);
            echo " <tr>
             <td>$row[id]</td>
             <td>$row[firstname]</td>
             <td>$row[lastname]</td>
             <td>$row[email]</td>
+            <td>$field[name]</td>
             <td>
             <a class ='btn btn-success btn-sm' href='updatePOO.php?id=$row[id]'>edit</a>
             <a class ='btn btn-danger btn-sm' href='deletePOO.php?id=$row[id]'>delete</a>
