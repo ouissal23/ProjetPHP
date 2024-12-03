@@ -10,7 +10,7 @@ public $lastname;
 public $email;
 public $password;
 public $reg_date; 
-
+public $idField ;
 
 public static $errorMsg = "";
 
@@ -19,17 +19,18 @@ public static $successMsg="";
 
 
 
-public function __construct($firstname,$lastname,$email,$password){
+public function __construct($firstname,$lastname,$email,$password,$idField ){
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->email = $email;
         $this->password = password_hash($password,PASSWORD_DEFAULT);
+        $this->idField =$idField ;
 }
 
 
 public function insertResearcher($tableName,$conn){
 
-    $sql = "INSERT INTO $tableName (firstname, lastname, email,password) VALUES ('$this->firstname','$this->lastname' , '$this->email', '$this->password')";
+    $sql = "INSERT INTO $tableName (firstname, lastname, email,password,idField ) VALUES ('$this->firstname','$this->lastname' , '$this->email', '$this->password','$this->idField' )";
     if(mysqli_query($conn, $sql)) { 
     self::$successMsg ="New record created successfully";
     }else {
@@ -41,7 +42,7 @@ public function insertResearcher($tableName,$conn){
 
 
 public static function  selectAllResearchers($tableName,$conn){
-    $sql = "SELECT id, firstname, lastname,email FROM $tableName "; 
+    $sql = "SELECT id, firstname, lastname,email,idField FROM $tableName "; 
   $result = mysqli_query($conn, $sql);
   if (mysqli_num_rows($result) > 0) {
     $data=[];
@@ -87,9 +88,21 @@ static function deleteResearcher($tableName,$conn,$id){
  }
 
 }
-
-
+public static function selectResearcherByFieldId($tableName,$conn,$idField){
+  $sql = "SELECT id, firstname, lastname,email,idField FROM $tableName WHERE idField='$idField' "; 
+  $result = mysqli_query($conn, $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $data=[];
+    while($row = mysqli_fetch_assoc($result)){
+        $data[]=$row;
+  
+    }
+      return $data;
+    }
+   }
 }
+
+
 
 
 ?>
