@@ -32,17 +32,22 @@ function createDatabase($dbName){
 
 function selectDatabase($dbName){
     mysqli_select_db($this->conn,$dbName);
+
 }
-
-
-function createTable($query){
+function createTable($query0,$query){
     
-    if (mysqli_query($this->conn, $query)) { 
+    if (mysqli_query($this->conn,$query0)) { 
+        echo "Table Fields created successfully"; 
+    }else{  
+        echo "Error creating table: " . mysqli_error($this->conn); 
+    }
+    
+    if (mysqli_query($this->conn,$query)) { 
         echo "Table Researcher created successfully"; 
     }else{  
         echo "Error creating table: " . mysqli_error($this->conn); 
     }
-        
+     
 
 }
 
